@@ -1,6 +1,6 @@
 def encode(words):
     """ convert the list to a string """
-    count = [0]
+    count = []
     for word in words:
         count.append(len(word))
     s = '@@@'.join(words)
@@ -10,15 +10,24 @@ def encode(words):
 def decode(s, count):
     """ convert the string to a list"""
     words = []
-    for i in range(len(count)-1):
-        if i == 0:
-            words.append(s[0: count[i + 1]])
+    z = 0
+    j = 0
+    for i in range(len(count)):
+        if i != 0:
+            j += 3
+        word = ""
+
+        for _ in range(count[z]):
+            word += s[j]
+            j += 1
         else:
-            words.append(s[count[i]+3: count[i + 1] + i*3])
+            z += 1
+            words.append(word)
     print(words)
 
 
-x, y = encode(["ibra", "siuu@@@"])
+x, y = encode(["ibra", "siu", "@@@meow"])
 print(x)
 print(y)
 decode(x, y)
+
